@@ -16,13 +16,13 @@ AWS.config.getCredentials(function (err) {
   }
 });
 
-// S3サービスオブジェクトを作成
+// S3サービスオブジェクトを作成;
 // const s3 = new AWS.S3();
 
 // // バケット内のファイル情報を取得するパラメータ
 // const params = {
-//   Bucket: 'tempory-ogata', // バケット名
-//   Key: 'image.png', // ファイル名
+//   Bucket: process.env.AWS_BACKETNAME, // バケット名
+//   Key: process.env.AWS_FILENAME, // ファイル名
 // };
 
 // // ファイルの情報を取得
@@ -37,9 +37,9 @@ AWS.config.getCredentials(function (err) {
 //普通にオブジェクトを取得しても、URLは取得できないので、指定された期間有効な署名付きURLを下記で発行できる
 const s3 = new AWS.S3();
 const params = {
-  Bucket: 'バケット名',
-  Key: 'オブジェクトのキー',
-  Expires: 60 * 5, // 有効期限（秒）
+  Bucket: process.env.AWS_BACKETNAME,
+  Key: process.env.AWS_FILENAME,
+  Expires: 30, // 有効期限（秒）
 };
 
 const url = s3.getSignedUrl('getObject', params);
