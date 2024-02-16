@@ -34,13 +34,21 @@ AWS.config.getCredentials(function (err) {
 //   }
 // });
 
+// const
+//下記がPreSignedUrl
 //普通にオブジェクトを取得しても、URLは取得できないので、指定された期間有効な署名付きURLを下記で発行できる
 const s3 = new AWS.S3();
 const params = {
   Bucket: process.env.AWS_BACKETNAME,
   Key: process.env.AWS_FILENAME,
-  Expires: 30, // 有効期限（秒）
+  Expires: 60 * 5, // 有効期限（秒）
 };
 
 const url = s3.getSignedUrl('getObject', params);
 console.log('署名付きURL:', url);
+
+// const originalUrl = new URL(
+//   'https://tempory-ogata.s3.ap-northeast-1.amazonaws.com/image.png'
+// );
+// const key = decodeURIComponent(originalUrl.pathname.slice(1)); // Slice removes / in the head.
+// console.log('key : ', key);
